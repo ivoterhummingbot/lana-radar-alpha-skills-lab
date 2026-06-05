@@ -48,11 +48,13 @@ lana-radar-alpha-skills-lab/
   README.md              # 项目总说明：原理、策略、周期、效果 demo、上线建议
   docs/                  # 研究计划、方法论、补充说明
   scripts/
-    README.md            # 脚本地图：每类脚本用途、输出、推荐运行顺序
+    README.md            # 活跃脚本地图：每类脚本用途、输出、推荐运行顺序
     discovery/           # 热币雷达 / 发现层 / selector 有效性
     execution/           # 策略执行层：入场、退出、持有、止损、搜索
-    validation/          # 反过拟合、recent24h/recent3、robustness、spike 验证
+    validation/          # 反过拟合、recent24h/recent3、robustness 验证
     ops/                 # 输入审计、shadow tracking、score/regime/signal 审计
+  backup/retired-scripts-2026-06/
+                          # 已退役历史探索脚本备份，不属于当前主线
   src/radar_alpha_skills_lab/
                           # 可复用核心模块：old radar、replay、signal/control 等
   tests/                 # unittest 合约与核心模块测试
