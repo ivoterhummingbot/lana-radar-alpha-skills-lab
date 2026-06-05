@@ -14,7 +14,7 @@ backup/retired-scripts-2026-06/
 scripts/
   discovery/   # 热币雷达 / 发现层 / selector 有效性
   execution/   # 策略执行层：入场、退出、持有、止损、搜索
-  validation/  # 反过拟合、recent24h/recent3、robustness 验证
+  validation/  # 反过拟合、recent24h/recent48h/recent3、robustness 验证
   ops/         # 输入审计、shadow tracking、score/regime/signal 审计
 ```
 
@@ -90,6 +90,7 @@ src/radar_alpha_skills_lab/old_radar_replay.py
 |---|---|---|---|
 | `validate_hotcoin_execution_antioverfit.py` | 主线 | 当前主规则反过拟合验证：全窗口/剔近期/邻近池/remove-top5 | `output/hotcoin-execution-antioverfit-latest.md` |
 | `validate_hotcoin_execution_recent24h.py` | 主线 | 最近可完成 24h outcome 验证；Sharpe、最高收益、stop 率 | `output/hotcoin-execution-recent24h-h24sl60-latest.md` |
+| `validate_hotcoin_execution_recent48h.py` | 主线 | 最近可完成 48h 信号窗口验证；每笔仍用 24h outcome，检查两日连续性/集中度/stop 率 | `output/hotcoin-execution-recent48h-h24sl60-latest.md` |
 | `validate_hotcoin_execution_recent3.py` | 主线 | 最近3个完整 BJT 日验证 | `output/hotcoin-execution-recent3-h24sl60-latest.md` |
 | `validate_hotcoin_execution_targeted.py` | 待重构 | targeted OHLC 验证尝试；较重 | `output/*targeted*.md` |
 | `validate_old_execution_alpha_full_window.py` | 反证保留 | 证明旧 PB/trailing 执行层全窗口不稳定 | `output/old-execution-alpha-full-window-latest.md` |
@@ -132,7 +133,10 @@ score/regime/signal/control 是否符合边界？
 4. validation/validate_hotcoin_execution_recent24h.py
    检查最新完整 24h 表现、Sharpe、最高收益、stop rate。
 
-5. ops/run_c_cd60_shadow_tracking.py
+5. validation/validate_hotcoin_execution_recent48h.py
+   检查最近 48h 信号窗口下两日连续性、集中度、stop rate。
+
+6. ops/run_c_cd60_shadow_tracking.py
    进入 live shadow / paper tracking。
 ```
 
