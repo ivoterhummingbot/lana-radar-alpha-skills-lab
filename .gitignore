@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Research outputs / local data
+output/
+*.sqlite
+*.sqlite3
+*.db
+*.parquet
+*.feather
+*.csv
+
+# Local/editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets
+.env
+*.key
+*.pem

@@ -1,0 +1,9 @@
+[project]
+name = "lana-radar-alpha-skills-lab"
+version = "0.1.0"
+description = "Read-only AlphaGBM-method research lab for Lana radar alpha discovery"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
