@@ -19,6 +19,7 @@
 ## 目录
 
 - [项目边界](#项目边界)
+- [仓库结构](#仓库结构)
 - [做多雷达原理](#做多雷达原理)
 - [策略族介绍](#策略族介绍)
 - [可行性分析](#可行性分析)
@@ -37,6 +38,38 @@
 - 本仓库只读使用 source project 的 SQLite / 输出文件。
 - 本仓库自己的结果写入 `output/`，但 `output/` 默认不提交 git。
 - 不提交：数据库、CSV、密钥、缓存、临时 artifact。
+
+---
+
+## 仓库结构
+
+```text
+lana-radar-alpha-skills-lab/
+  README.md              # 项目总说明：原理、策略、周期、效果 demo、上线建议
+  docs/                  # 研究计划、方法论、补充说明
+  scripts/
+    README.md            # 脚本地图：每类脚本用途、输出、推荐运行顺序
+    discovery/           # 热币雷达 / 发现层 / selector 有效性
+    execution/           # 策略执行层：入场、退出、持有、止损、搜索
+    validation/          # 反过拟合、recent24h/recent3、robustness、spike 验证
+    ops/                 # 输入审计、shadow tracking、score/regime/signal 审计
+  src/radar_alpha_skills_lab/
+                          # 可复用核心模块：old radar、replay、signal/control 等
+  tests/                 # unittest 合约与核心模块测试
+  output/                # 本地结果目录；默认 gitignore，不上传数据库/大结果
+```
+
+### 脚本四类划分
+
+| 类别 | 目录 | 回答的问题 | 代表脚本 |
+|---|---|---|---|
+| Discovery / 热币雷达 | `scripts/discovery/` | 老雷达是否能从热币池里选出后续更强的币？ | `substantiate_old_radar_effectiveness.py` |
+| Execution / 策略执行 | `scripts/execution/` | 已发现热币后，怎么入场、持有、止损、退出？ | `search_hotcoin_execution_proxy.py` |
+| Validation / 验证 | `scripts/validation/` | 是否过拟合？最近24h/最近3天是否继续有效？ | `validate_hotcoin_execution_antioverfit.py`, `validate_hotcoin_execution_recent24h.py` |
+| Ops / 线上与审计 | `scripts/ops/` | 输入数据、shadow tracking、score/regime/signal 是否正常？ | `audit_readonly_inputs.py`, `run_c_cd60_shadow_tracking.py` |
+
+更多脚本说明见：[`scripts/README.md`](scripts/README.md)。
+结果与文档目录说明见：[`docs/output-and-docs.md`](docs/output-and-docs.md)。
 
 ---
 
